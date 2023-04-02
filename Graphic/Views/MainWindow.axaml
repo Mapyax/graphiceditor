@@ -46,30 +46,72 @@
 				</ItemsControl.ItemsPanel>
 				<ItemsControl.DataTemplates>
 					<DataTemplate DataType="{x:Type locc:Gr_Line}">
-						<Line StartPoint="{Binding StartPoint}" EndPoint="{Binding EndPoint}" Stroke="{Binding StrokeColor}" StrokeThickness="{Binding StrokeThic}"/>
+						<Line StartPoint="{Binding StartPoint}" EndPoint="{Binding EndPoint}" Stroke="{Binding StrokeColor}" StrokeThickness="{Binding StrokeThic}">
+							<Line.RenderTransform>
+								<TransformGroup>
+									<RotateTransform Angle="{Binding AngleRT}" CenterX="{Binding RTX}" CenterY="{Binding RTY}"/>
+									<ScaleTransform ScaleX="{Binding STX}" ScaleY="{Binding STY}"/>
+									<SkewTransform AngleX="{Binding AngleSTX}" AngleY="{Binding AngleSTY}"/>
+								</TransformGroup>
+							</Line.RenderTransform>
+						</Line>
 					</DataTemplate>
 					<DataTemplate DataType="{x:Type locc:Gr_PolyLine}">
-						<Polyline Points="{Binding Point_colection}" Stroke="{Binding StrokeColor}" StrokeThickness="{Binding StrokeThic}"/>
+						<Polyline Points="{Binding Point_colection}" Stroke="{Binding StrokeColor}" StrokeThickness="{Binding StrokeThic}">
+							<Polyline.RenderTransform>
+								<TransformGroup>
+									<RotateTransform Angle="{Binding AngleRT}" CenterX="{Binding RTX}" CenterY="{Binding RTY}"/>
+									<ScaleTransform ScaleX="{Binding STX}" ScaleY="{Binding STY}"/>
+									<SkewTransform AngleX="{Binding AngleSTX}" AngleY="{Binding AngleSTY}"/>
+								</TransformGroup>
+							</Polyline.RenderTransform>
+						</Polyline>
 					</DataTemplate>
 					<DataTemplate DataType="{x:Type locc:Gr_Polygon}">
-						<Polygon Points="{Binding Point_colection}" Stroke="{Binding StrokeColor}" StrokeThickness="{Binding StrokeThic}" Fill="{Binding Fill}"/>
+						<Polygon Points="{Binding Point_colection}" Stroke="{Binding StrokeColor}" StrokeThickness="{Binding StrokeThic}" Fill="{Binding Fill}">
+							<Polygon.RenderTransform>
+								<TransformGroup>
+									<RotateTransform Angle="{Binding AngleRT}" CenterX="{Binding RTX}" CenterY="{Binding RTY}"/>
+									<ScaleTransform ScaleX="{Binding STX}" ScaleY="{Binding STY}"/>
+									<SkewTransform AngleX="{Binding AngleSTX}" AngleY="{Binding AngleSTY}"/>
+								</TransformGroup>
+							</Polygon.RenderTransform>
+						</Polygon>
 					</DataTemplate>
 					<DataTemplate DataType="{x:Type locc:Gr_Rectangle}">
 						<Rectangle Width="{Binding Width}" Height="{Binding Height}" Fill="{Binding Fill}" Stroke="{Binding StrokeColor}" StrokeThickness="{Binding StrokeThic}">
 							<Rectangle.RenderTransform>
-								<TranslateTransform X="{Binding Start_point.X}" Y="{Binding Start_point.Y}"/>
+								<TransformGroup>
+									<TranslateTransform X="{Binding Start_point.X}" Y="{Binding Start_point.Y}"/>
+									<RotateTransform Angle="{Binding AngleRT}" CenterX="{Binding RTX}" CenterY="{Binding RTY}"/>
+									<ScaleTransform ScaleX="{Binding STX}" ScaleY="{Binding STY}"/>
+									<SkewTransform AngleX="{Binding AngleSTX}" AngleY="{Binding AngleSTY}"/>
+								</TransformGroup>
 							</Rectangle.RenderTransform>
 						</Rectangle>
 					</DataTemplate>
 					<DataTemplate DataType="{x:Type locc:Gr_Ellipse}">
 						<Ellipse Width="{Binding Width}" Height="{Binding Height}" Fill="{Binding Fill}" Stroke="{Binding StrokeColor}" StrokeThickness="{Binding StrokeThic}">
 							<Ellipse.RenderTransform>
-								<TranslateTransform X="{Binding StartPoint.X}" Y="{Binding StartPoint.Y}"/>
+								<TransformGroup>
+									<TranslateTransform X="{Binding StartPoint.X}" Y="{Binding StartPoint.Y}"/>
+									<RotateTransform Angle="{Binding AngleRT}" CenterX="{Binding RTX}" CenterY="{Binding RTY}"/>
+									<ScaleTransform ScaleX="{Binding STX}" ScaleY="{Binding STY}"/>
+									<SkewTransform AngleX="{Binding AngleSTX}" AngleY="{Binding AngleSTY}"/>
+								</TransformGroup>
 							</Ellipse.RenderTransform>
 						</Ellipse>
 					</DataTemplate>
 					<DataTemplate DataType="{x:Type locc:Gr_Path}">
-						<Path Fill="{Binding Fill}" Data="{Binding Points}" Stroke="{Binding StrokeColor}" StrokeThickness="{Binding StrokeThic}"/>
+						<Path Fill="{Binding Fill}" Data="{Binding Points}" Stroke="{Binding StrokeColor}" StrokeThickness="{Binding StrokeThic}">
+							<Path.RenderTransform>
+								<TransformGroup>
+									<RotateTransform Angle="{Binding AngleRT}" CenterX="{Binding RTX}" CenterY="{Binding RTY}"/>
+									<ScaleTransform ScaleX="{Binding STX}" ScaleY="{Binding STY}"/>
+									<SkewTransform AngleX="{Binding AngleSTX}" AngleY="{Binding AngleSTY}"/>
+								</TransformGroup>
+							</Path.RenderTransform>
+						</Path>
 					</DataTemplate>
 				</ItemsControl.DataTemplates>
 			</ItemsControl>

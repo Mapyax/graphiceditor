@@ -45,7 +45,7 @@
 			<NumericUpDown Name="numericUpDownStroke" Value="{Binding Thic, Mode=TwoWay}" Increment="1" Minimum="1" Width="145" Margin="0,0,0,20"/>
 
 			<TextBlock Text="Цвет заливки:" Width="130"/>
-			<ComboBox Name="comboBoxFillColor" SelectedIndex="{Binding Select2, Mode=TwoWay}" Margin="0,0,0,20" Width="145">
+			<ComboBox Name="comboBoxFillColor" SelectedIndex="{Binding Select2, Mode=TwoWay}" Margin="0,0,0,40" Width="145">
 				<ComboBoxItem>
 					<Rectangle Width="144" Height="20" Fill="Black"/>
 				</ComboBoxItem>
@@ -65,6 +65,19 @@
 					<Rectangle Width="144" Height="20" Fill="RosyBrown"/>
 				</ComboBoxItem>
 			</ComboBox>
+			
+			
+			<TextBlock Text="Угл поворорота:" Width="130"/>
+			<TextBox Name="textBoxRenderTransformAngle" Text="{Binding Angle, Mode=TwoWay}" Width="145" Margin="0,0,0,20"/>
+		
+			<TextBlock Text="Точка поворота:" Width="130"/>
+			<TextBox Name="textBoxRotateCenter" Text="{Binding Rotate, Mode=TwoWay}" Width="145" Margin="0,0,0,20"/>
+		
+			<TextBlock Text="Scale tr:" Width="130"/>
+			<TextBox Name="textBoxScaleTransform" Text="{Binding Scale, Mode=TwoWay}" Width="145" Margin="0,0,0,20"/>
+		
+			<TextBlock Text="Skew tr:" Width="130"/>
+			<TextBox Name="textBoxSkewTransform" Text="{Binding Skew, Mode=TwoWay}" Width="145" Margin="0,0,0,20"/>
 		</WrapPanel>
 		<WrapPanel Grid.Column="0" VerticalAlignment="Bottom">
 			<Button Name="buttonAdd" Command="{Binding Button_add}" Content="Добавить" Width="149" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>

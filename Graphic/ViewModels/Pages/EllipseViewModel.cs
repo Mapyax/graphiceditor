@@ -11,6 +11,7 @@ namespace Graphic.ViewModels.Pages
 		private int select1 = 0, select2 = 0, select_figure, flag = 0;
 		private int wid = 0, hei = 0;
 		private double thic = 1;
+		private string angle = "0", rotate = "0 0", scale = "1 1", skew = "0 0";
 		public EllipseViewModel(ref ObservableCollection<IFigure> colec)
 		{
 			colection = colec;
@@ -72,6 +73,39 @@ namespace Graphic.ViewModels.Pages
 				this.RaiseAndSetIfChanged(ref hei, value);
 			}
 		}
+		public string Angle
+		{
+			get => angle;
+			set
+			{
+				this.RaiseAndSetIfChanged(ref angle, value);
+			}
+		}
+		public string Rotate
+		{
+			get => rotate;
+			set
+			{
+				this.RaiseAndSetIfChanged(ref rotate, value);
+			}
+		}
+		public string Scale
+		{
+			get => scale;
+			set
+			{
+				this.RaiseAndSetIfChanged(ref scale, value);
+			}
+		}
+		public string Skew
+		{
+			get => skew;
+			set
+			{
+				this.RaiseAndSetIfChanged(ref skew, value);
+			}
+		}
+
 		public void UpdateRef(ref ObservableCollection<IFigure> figur_colection)
 		{
 			colection = figur_colection;
@@ -100,6 +134,10 @@ namespace Graphic.ViewModels.Pages
 			else if (color2 == "Blue") Select2 = 3;
 			else if (color2 == "Red") Select2 = 4;
 			else Select2 = 5;
+			Angle = figure.AngleRT.ToString();
+			Rotate = figure.RTX.ToString() + " " + figure.RTY.ToString();
+			Scale = figure.STX.ToString() + " " + figure.STY.ToString();
+			Skew = figure.AngleSTX.ToString() + " " + figure.AngleSTY.ToString();
 			flag = 1;
 		}
 		public void Button_add()
@@ -122,6 +160,7 @@ namespace Graphic.ViewModels.Pages
 				else color22 = "RosyBrown";
 
 				Gr_Ellipse ellipse = new Gr_Ellipse(Name, Wid, Hei, Points, color11, Thic, color22);
+				ellipse.Gr_Ellipse_transform(Angle, Rotate, Scale, Skew);
 				if (flag == 0) colection.Add(ellipse);
 				else if (flag == 1)
 				{
@@ -142,6 +181,10 @@ namespace Graphic.ViewModels.Pages
 			Thic = 1;
 			Wid = 1;
 			Hei = 1;
+			Angle = "0";
+			Rotate = "0 0";
+			Scale = "1 1";
+			Skew = "0 0";
 		}
 	}
 }

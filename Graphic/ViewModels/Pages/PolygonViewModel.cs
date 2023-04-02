@@ -10,13 +10,13 @@ namespace Graphic.ViewModels.Pages
 		private string name, points;
 		private int select1 = 0, select2 = 0, select_figure, flag = 0;
 		private double thic = 1;
+		private string angle = "0", rotate = "0 0", scale = "1 1", skew = "0 0";
 		public PolygonViewModel(ref ObservableCollection<IFigure> col)
 		{
 			colection = col;
 			name = string.Empty;
 			points = string.Empty;
 		}
-
 		public string Name
 		{
 			get => name;
@@ -61,7 +61,38 @@ namespace Graphic.ViewModels.Pages
 				this.RaiseAndSetIfChanged(ref select2, value);
 			}
 		}
-
+		public string Angle
+		{
+			get => angle;
+			set
+			{
+				this.RaiseAndSetIfChanged(ref angle, value);
+			}
+		}
+		public string Rotate
+		{
+			get => rotate;
+			set
+			{
+				this.RaiseAndSetIfChanged(ref rotate, value);
+			}
+		}
+		public string Scale
+		{
+			get => scale;
+			set
+			{
+				this.RaiseAndSetIfChanged(ref scale, value);
+			}
+		}
+		public string Skew
+		{
+			get => skew;
+			set
+			{
+				this.RaiseAndSetIfChanged(ref skew, value);
+			}
+		}
 		public void UpdateRef(ref ObservableCollection<IFigure> figur_colection)
 		{
 			colection = figur_colection;
@@ -88,6 +119,10 @@ namespace Graphic.ViewModels.Pages
 			else if (color2 == "Blue") Select2 = 3;
 			else if (color2 == "Red") Select2 = 4;
 			else Select2 = 5;
+			Angle = figure.AngleRT.ToString();
+			Rotate = figure.RTX.ToString() + " " + figure.RTY.ToString();
+			Scale = figure.STX.ToString() + " " + figure.STY.ToString();
+			Skew = figure.AngleSTX.ToString() + " " + figure.AngleSTY.ToString();
 			flag = 1;
 		}
 		public void Button_add()
@@ -111,6 +146,7 @@ namespace Graphic.ViewModels.Pages
 				else color22 = "RosyBrown";
 
 				Graphic.Models.Gr_Polygon polygon = new Gr_Polygon(Name, temp_all_point, color11, Thic, color22);
+				polygon.Gr_Polygon_transform(Angle, Rotate, Scale, Skew);
 				if (flag == 0) colection.Add(polygon);
 				else if (flag == 1)
 				{
@@ -129,6 +165,10 @@ namespace Graphic.ViewModels.Pages
 			Select1 = 0;
 			Select2 = 0;
 			Thic = 1;
+			Angle = "0";
+			Rotate = "0 0";
+			Scale = "1 1";
+			Skew = "0 0";
 		}
 	}
 }

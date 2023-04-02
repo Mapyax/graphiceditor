@@ -48,6 +48,7 @@ namespace Graphic.ViewModels
 			};
 			curent_content = content_colection[0];
 		}
+
 		public async void SaveXML()
 		{
 			SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -98,6 +99,7 @@ namespace Graphic.ViewModels
 			ellipse_content.UpdateRef(ref figures_colection);
 			path_content.UpdateRef(ref figures_colection);
 		}
+
 		public ObservableCollection<IFigure> Figures_colection
 		{
 			get => figures_colection;

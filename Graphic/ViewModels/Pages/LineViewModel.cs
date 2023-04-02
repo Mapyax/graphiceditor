@@ -10,6 +10,8 @@ namespace Graphic.ViewModels.Pages
 		private string name, start_point, end_point;
 		private int select, flag = 0, select_figure;
 		private double thick = 1;
+		private string angle = "0", rotate = "0 0", scale = "1 1", skew = "0 0";
+
 		public LineViewModel(ref ObservableCollection<IFigure> col)
 		{
 			colection = col;
@@ -18,6 +20,7 @@ namespace Graphic.ViewModels.Pages
 			end_point = string.Empty;
 			flag = 0;
 		}
+
 		public string Name
 		{
 			get => name;
@@ -59,6 +62,39 @@ namespace Graphic.ViewModels.Pages
 				this.RaiseAndSetIfChanged(ref select, value);
 			}
 		}
+		public string Angle
+		{
+			get => angle;
+			set
+			{
+				this.RaiseAndSetIfChanged(ref angle, value);
+			}
+		}
+		public string Rotate
+		{
+			get => rotate;
+			set
+			{
+				this.RaiseAndSetIfChanged(ref rotate, value);
+			}
+		}
+		public string Scale
+		{
+			get => scale;
+			set
+			{
+				this.RaiseAndSetIfChanged(ref scale, value);
+			}
+		}
+		public string Skew
+		{
+			get => skew;
+			set
+			{
+				this.RaiseAndSetIfChanged(ref skew, value);
+			}
+		}
+
 		public void UpdateRef(ref ObservableCollection<IFigure> figur_colection)
 		{
 			colection = figur_colection;
@@ -79,6 +115,10 @@ namespace Graphic.ViewModels.Pages
 			else if (color == "Blue") Select = 3;
 			else if (color == "Red") Select = 4;
 			else Select = 5;
+			Angle = figur.AngleRT.ToString();
+			Rotate = figur.RTX.ToString() + " " + figur.RTY.ToString();
+			Scale = figur.STX.ToString() + " " + figur.STY.ToString();
+			Skew = figur.AngleSTX.ToString() + " " + figur.AngleSTY.ToString();
 			flag = 1;
 		}
 		public void Button_add()
@@ -94,6 +134,7 @@ namespace Graphic.ViewModels.Pages
 				else color11 = "RosyBrown";
 
 				Gr_Line line = new Gr_Line(Name, Thic, color11, Start, End);
+				line.Gr_Line_transform(Angle, Rotate, Scale, Skew);
 				if (flag == 0) colection.Add(line);
 				else if (flag == 1)
 				{
@@ -113,6 +154,10 @@ namespace Graphic.ViewModels.Pages
 			Thic = 1;
 			Select = 0;
 			flag = 0;
+			Angle = "0";
+			Rotate = "0 0";
+			Scale = "1 1";
+			Skew = "0 0";
 		}
 	}
 }
