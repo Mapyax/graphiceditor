@@ -20,92 +20,58 @@ namespace Graphic.ViewModels.Pages
 		public string Name
 		{
 			get => name;
-			set
-			{
-				this.RaiseAndSetIfChanged(ref name, value);
-			}
+			set => this.RaiseAndSetIfChanged(ref name, value);
 		}
 		public string Points
 		{
 			get => points;
-			set
-			{
-				this.RaiseAndSetIfChanged(ref points, value);
-			}
+			set => this.RaiseAndSetIfChanged(ref points, value);
 		}
 		public double Thic
 		{
 			get => thic;
-			set
-			{
-				this.RaiseAndSetIfChanged(ref thic, value);
-			}
+			set => this.RaiseAndSetIfChanged(ref thic, value);
 		}
 		public int Select1
 		{
 			get => select1;
-			set
-			{
-				this.RaiseAndSetIfChanged(ref select1, value);
-			}
+			set => this.RaiseAndSetIfChanged(ref select1, value);
 		}
 		public int Select2
 		{
 			get => select2;
-			set
-			{
-				this.RaiseAndSetIfChanged(ref select2, value);
-			}
+			set => this.RaiseAndSetIfChanged(ref select2, value);
 		}
 		public int Wid
 		{
 			get => wid;
-			set
-			{
-				this.RaiseAndSetIfChanged(ref wid, value);
-			}
+			set => this.RaiseAndSetIfChanged(ref wid, value);
 		}
 		public int Hei
 		{
 			get => hei;
-			set
-			{
-				this.RaiseAndSetIfChanged(ref hei, value);
-			}
+			set => this.RaiseAndSetIfChanged(ref hei, value);
 		}
 		public string Angle
 		{
 			get => angle;
-			set
-			{
-				this.RaiseAndSetIfChanged(ref angle, value);
-			}
+			set => this.RaiseAndSetIfChanged(ref angle, value);
 		}
 		public string Rotate
 		{
 			get => rotate;
-			set
-			{
-				this.RaiseAndSetIfChanged(ref rotate, value);
-			}
+			set => this.RaiseAndSetIfChanged(ref rotate, value);
 		}
 		public string Scale
 		{
 			get => scale;
-			set
-			{
-				this.RaiseAndSetIfChanged(ref scale, value);
-			}
+			set => this.RaiseAndSetIfChanged(ref scale, value);
 		}
 		public string Skew
 		{
 			get => skew;
-			set
-			{
-				this.RaiseAndSetIfChanged(ref skew, value);
-			}
+			set => this.RaiseAndSetIfChanged(ref skew, value);
 		}
-
 		public void UpdateRef(ref ObservableCollection<IFigure> figur_colection)
 		{
 			colection = figur_colection;

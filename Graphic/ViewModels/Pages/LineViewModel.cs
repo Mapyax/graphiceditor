@@ -11,7 +11,6 @@ namespace Graphic.ViewModels.Pages
 		private int select, flag = 0, select_figure;
 		private double thick = 1;
 		private string angle = "0", rotate = "0 0", scale = "1 1", skew = "0 0";
-
 		public LineViewModel(ref ObservableCollection<IFigure> col)
 		{
 			colection = col;
@@ -20,81 +19,51 @@ namespace Graphic.ViewModels.Pages
 			end_point = string.Empty;
 			flag = 0;
 		}
-
 		public string Name
 		{
 			get => name;
-			set
-			{
-				this.RaiseAndSetIfChanged(ref name, value);
-			}
+			set => this.RaiseAndSetIfChanged(ref name, value);
 		}
 		public string Start
 		{
 			get => start_point;
-			set
-			{
-				this.RaiseAndSetIfChanged(ref start_point, value);
-			}
+			set => this.RaiseAndSetIfChanged(ref start_point, value);
 		}
-
 		public string End
 		{
 			get => end_point;
-			set
-			{
-				this.RaiseAndSetIfChanged(ref end_point, value);
-			}
+			set => this.RaiseAndSetIfChanged(ref end_point, value);
 		}
 		public double Thic
 		{
 			get => thick;
-			set
-			{
-				this.RaiseAndSetIfChanged(ref thick, value);
-			}
+			set => this.RaiseAndSetIfChanged(ref thick, value);
 		}
 		public int Select
 		{
 			get => select;
-			set
-			{
-				this.RaiseAndSetIfChanged(ref select, value);
-			}
+			set => this.RaiseAndSetIfChanged(ref select, value);
 		}
 		public string Angle
 		{
 			get => angle;
-			set
-			{
-				this.RaiseAndSetIfChanged(ref angle, value);
-			}
+			set => this.RaiseAndSetIfChanged(ref angle, value);
 		}
 		public string Rotate
 		{
 			get => rotate;
-			set
-			{
-				this.RaiseAndSetIfChanged(ref rotate, value);
-			}
+			set => this.RaiseAndSetIfChanged(ref rotate, value);
 		}
 		public string Scale
 		{
 			get => scale;
-			set
-			{
-				this.RaiseAndSetIfChanged(ref scale, value);
-			}
+			set => this.RaiseAndSetIfChanged(ref scale, value);
 		}
 		public string Skew
 		{
 			get => skew;
-			set
-			{
-				this.RaiseAndSetIfChanged(ref skew, value);
-			}
+			set => this.RaiseAndSetIfChanged(ref skew, value);
 		}
-
 		public void UpdateRef(ref ObservableCollection<IFigure> figur_colection)
 		{
 			colection = figur_colection;
@@ -145,7 +114,6 @@ namespace Graphic.ViewModels.Pages
 				Button_cancel();
 			}
 		}
-
 		public void Button_cancel()
 		{
 			Name = string.Empty;

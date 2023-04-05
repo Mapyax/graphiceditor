@@ -5,27 +5,24 @@ namespace Graphic.Models
 {
 	public class Gr_Polygon : IFigure
 	{
-		ObservableCollection<Avalonia.Point> points_colection;
+		private ObservableCollection<Avalonia.Point> points_colection;
+		private SolidColorBrush fill;
+		private string save;
+
 		public ObservableCollection<Avalonia.Point> Point_colection
 		{
 			get => points_colection;
+			set => SetAndRaise(ref points_colection, value);
 		}
-		public SolidColorBrush Fill { get; set; }
-		public string save_point { get; set; }
-		public string Name { get; set; }
-		public double StrokeThic { get; set; }
-		public SolidColorBrush StrokeColor { get; set; }
-
-		public Gr_Polygon(string name, string temp_point, string stroke_color, double stroke_thic, string fill)
+		public SolidColorBrush Fill { get => fill; set => SetAndRaise(ref fill, value); }
+		public string save_point { get => save; set => SetAndRaise(ref save, value); }
+		public Gr_Polygon(string nname, string temp_point, string stroke_color, double stroke_thic, string fill) : base(nname, stroke_thic, stroke_color)
 		{
-			Name = name;
-			StrokeThic = stroke_thic;
-			StrokeColor = SolidColorBrush.Parse(stroke_color);
 			Fill = SolidColorBrush.Parse(fill);
 			save_point = temp_point;
-			points_colection = CreatePoint(temp_point);
+			Point_colection = CreatePoint(temp_point);
+			Pos = points_colection[0];
 		}
-
 		private ObservableCollection<Avalonia.Point> CreatePoint(string temp_all_point)
 		{
 			string temp_point = string.Empty;
@@ -49,7 +46,6 @@ namespace Graphic.Models
 			}
 			return col_point;
 		}
-
 		public double AngleRT { get; set; }
 		public double RTX { get; set; }
 		public double RTY { get; set; }
@@ -57,7 +53,6 @@ namespace Graphic.Models
 		public double STY { get; set; }
 		public double AngleSTX { get; set; }
 		public double AngleSTY { get; set; }
-
 		public void Gr_Polygon_transform(string angle_rt, string rt, string st, string angle_st)
 		{
 			AngleRT = double.Parse(angle_rt);
@@ -96,5 +91,7 @@ namespace Graphic.Models
 				}
 			}
 		}
+		private Avalonia.Point pos;
+		public Avalonia.Point Pos { get => pos; set => SetAndRaise(ref pos, value); }
 	}
 }

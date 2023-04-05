@@ -48,7 +48,6 @@ namespace Graphic.ViewModels
 			};
 			curent_content = content_colection[0];
 		}
-
 		public async void SaveXML()
 		{
 			SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -64,6 +63,12 @@ namespace Graphic.ViewModels
 			Figures_colection = new ObservableCollection<IFigure>(xml_loader.XmlLoad(result[0]));
 			UpdateAllRef();
 		}
+		public void LoadXML(string path)
+		{
+			XmlFunction xml_loader = new XmlFunction();
+			Figures_colection = new ObservableCollection<IFigure>(xml_loader.XmlLoad(path));
+			UpdateAllRef();
+		}
 		public async Task SaveJSON()
 		{
 			SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -77,6 +82,12 @@ namespace Graphic.ViewModels
 			string[]? result = await openFileDialog.ShowAsync(mainWindow);
 			JsonFunction json_loader = new JsonFunction();
 			Figures_colection = new ObservableCollection<IFigure>(json_loader.JsonLoad(result[0]));
+			UpdateAllRef();
+		}
+		public void LoadJSON(string path)
+		{
+			JsonFunction json_loader = new JsonFunction();
+			Figures_colection = new ObservableCollection<IFigure>(json_loader.JsonLoad(path));
 			UpdateAllRef();
 		}
 		public async Task SavePng()
@@ -99,14 +110,10 @@ namespace Graphic.ViewModels
 			ellipse_content.UpdateRef(ref figures_colection);
 			path_content.UpdateRef(ref figures_colection);
 		}
-
 		public ObservableCollection<IFigure> Figures_colection
 		{
 			get => figures_colection;
-			set
-			{
-				this.RaiseAndSetIfChanged(ref figures_colection, value);
-			}
+			set => this.RaiseAndSetIfChanged(ref figures_colection, value);
 		}
 		public int Listbox_index
 		{
@@ -167,10 +174,7 @@ namespace Graphic.ViewModels
 		public ViewModelBase Content_colection
 		{
 			get => curent_content;
-			set
-			{
-				this.RaiseAndSetIfChanged(ref curent_content, value);
-			}
+			set => this.RaiseAndSetIfChanged(ref curent_content, value);
 		}
 	}
 }

@@ -9,7 +9,6 @@ namespace Graphic.Models
 	{
 		public XmlFunction()
 		{ }
-
 		public void XmlSave(string path, ObservableCollection<IFigure> figures_colection)
 		{
 			XDocument xDocument = new XDocument();
@@ -33,6 +32,7 @@ namespace Graphic.Models
 					XElement xElementSTY = new XElement("sty", line.STY);
 					XElement xElementASTX = new XElement("astx", line.AngleSTX);
 					XElement xElementASTY = new XElement("asty", line.AngleSTY);
+					XElement xElementPos = new XElement("pos", line.Pos);
 
 					xElementline.Add(xAttributeName);
 					xElementline.Add(xElementlineStroke);
@@ -46,6 +46,7 @@ namespace Graphic.Models
 					xElementline.Add(xElementSTY);
 					xElementline.Add(xElementASTX);
 					xElementline.Add(xElementASTY);
+					xElementline.Add(xElementPos);
 
 					xElement_colection.Add(xElementline);
 				}
@@ -64,6 +65,7 @@ namespace Graphic.Models
 					XElement xElementSTY = new XElement("sty", poly.STY);
 					XElement xElementASTX = new XElement("astx", poly.AngleSTX);
 					XElement xElementASTY = new XElement("asty", poly.AngleSTY);
+					XElement xElementPos = new XElement("pos", poly.Pos);
 
 					xElementpoly.Add(xAttributeName);
 					xElementpoly.Add(xElementStroke);
@@ -76,6 +78,7 @@ namespace Graphic.Models
 					xElementpoly.Add(xElementSTY);
 					xElementpoly.Add(xElementASTX);
 					xElementpoly.Add(xElementASTY);
+					xElementpoly.Add(xElementPos);
 
 					xElement_colection.Add(xElementpoly);
 				}
@@ -95,6 +98,7 @@ namespace Graphic.Models
 					XElement xElementSTY = new XElement("sty", polygon.STY);
 					XElement xElementASTX = new XElement("astx", polygon.AngleSTX);
 					XElement xElementASTY = new XElement("asty", polygon.AngleSTY);
+					XElement xElementPos = new XElement("pos", polygon.Pos);
 
 					xPolygon.Add(xName);
 					xPolygon.Add(xPoint);
@@ -108,6 +112,7 @@ namespace Graphic.Models
 					xPolygon.Add(xElementSTY);
 					xPolygon.Add(xElementASTX);
 					xPolygon.Add(xElementASTY);
+					xPolygon.Add(xElementPos);
 
 					xElement_colection.Add(xPolygon);
 				}
@@ -199,6 +204,7 @@ namespace Graphic.Models
 					XElement xElementSTY = new XElement("sty", pat.STY);
 					XElement xElementASTX = new XElement("astx", pat.AngleSTX);
 					XElement xElementASTY = new XElement("asty", pat.AngleSTY);
+					XElement xElementPos = new XElement("pos", pat.Pos);
 
 					xPath.Add(xName);
 					xPath.Add(xThic);
@@ -212,6 +218,7 @@ namespace Graphic.Models
 					xPath.Add(xElementSTY);
 					xPath.Add(xElementASTX);
 					xPath.Add(xElementASTY);
+					xPath.Add(xElementPos);
 
 					xElement_colection.Add(xPath);
 				}
@@ -219,7 +226,6 @@ namespace Graphic.Models
 			xDocument.Add(xElement_colection);
 			xDocument.Save(path);
 		}
-
 		public IEnumerable<IFigure> XmlLoad(string path)
 		{
 			XDocument xDocument = XDocument.Load(path);
@@ -252,9 +258,11 @@ namespace Graphic.Models
 					var STY = line.Element("sty");
 					var ASTX = line.Element("astx");
 					var ASTY = line.Element("asty");
+					var Pos = line.Element("pos");
 
 					Gr_Line lin = new Gr_Line(lName.Value, double.Parse(lThic.Value), lStroke.Value, lStart.Value, lEnd.Value);
 					lin.Gr_Line_transform(AngleRT.Value, RTX.Value + " " + RTY.Value, STX.Value + " " + STY.Value, ASTX.Value + " " + ASTY.Value);
+					lin.Pos = Avalonia.Point.Parse(Pos.Value);
 					return lin;
 				});
 			IEnumerable<IFigure>? polys = xDocument.Element("Figures")?
@@ -284,9 +292,11 @@ namespace Graphic.Models
 						var STY = poly.Element("sty");
 						var ASTX = poly.Element("astx");
 						var ASTY = poly.Element("asty");
+						var Pos = poly.Element("pos");
 
 						Gr_PolyLine polyLine = new Gr_PolyLine(pName.Value, pPoint.Value, pStroke.Value, double.Parse(pThic.Value));
 						polyLine.Gr_Polyline_transform(AngleRT.Value, RTX.Value + " " + RTY.Value, STX.Value + " " + STY.Value, ASTX.Value + " " + ASTY.Value);
+						polyLine.Pos = Avalonia.Point.Parse(Pos.Value);
 						return polyLine;
 					});
 			IEnumerable<IFigure>? polyg = xDocument.Element("Figures")?
@@ -318,9 +328,11 @@ namespace Graphic.Models
 					var STY = polyg.Element("sty");
 					var ASTX = polyg.Element("astx");
 					var ASTY = polyg.Element("asty");
+					var Pos = polyg.Element("pos");
 
 					Gr_Polygon polygon = new Gr_Polygon(pName.Value, pPoint.Value, pStroke.Value, double.Parse(pThic.Value), pFill.Value);
 					polygon.Gr_Polygon_transform(AngleRT.Value, RTX.Value + " " + RTY.Value, STX.Value + " " + STY.Value, ASTX.Value + " " + ASTY.Value);
+					polygon.Pos = Avalonia.Point.Parse(Pos.Value);
 					return polygon;
 				});
 			IEnumerable<IFigure>? rect = xDocument.Element("Figures")?
@@ -419,12 +431,13 @@ namespace Graphic.Models
 					var STY = pa.Element("sty");
 					var ASTX = pa.Element("astx");
 					var ASTY = pa.Element("asty");
+					var Pos = pa.Element("pos");
 
 					Gr_Path path1 = new Gr_Path(pName.Value, pPoint.Value, pStroke.Value, double.Parse(pThic.Value), pFill.Value);
 					path1.Gr_Path_transform(AngleRT.Value, RTX.Value + " " + RTY.Value, STX.Value + " " + STY.Value, ASTX.Value + " " + ASTY.Value);
+					path1.Pos = Avalonia.Point.Parse(Pos.Value);
 					return path1;
 				});
-
 
 			var figures = lines.Concat(polys);
 			figures = figures.Concat(polyg);

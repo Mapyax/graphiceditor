@@ -7,7 +7,6 @@ namespace Graphic.Models
 	public class PngFunction
 	{
 		public PngFunction() { }
-
 		public void PngSave(string path, ItemsControl canvas)
 		{
 			var pixelSize = new PixelSize((int)canvas.Width, (int)canvas.Height);

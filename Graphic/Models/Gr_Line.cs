@@ -1,25 +1,20 @@
-﻿using Avalonia.Media;
-
-namespace Graphic.Models
+﻿namespace Graphic.Models
 {
 	public class Gr_Line : IFigure
 	{
-		public string Name { get; set; }
-		public double StrokeThic { get; set; }
-		public SolidColorBrush StrokeColor { get; set; }
-		public Avalonia.Point StartPoint { get; set; }
-		public Avalonia.Point EndPoint { get; set; }
-
-
-		public Gr_Line(string name, double stroke_thic, string stroke, string start, string end)
+		private Avalonia.Point start, end;
+		public Avalonia.Point StartPoint { get => start; set => SetAndRaise(ref start, value); }
+		public Avalonia.Point EndPoint { get => end; set => SetAndRaise(ref end, value); }
+		public double DX { get; set; }
+		public double DY { get; set; }
+		public Gr_Line(string nname, double stroke_thic, string stroke, string sstart, string eend) : base(nname, stroke_thic, stroke)
 		{
-			Name = name;
-			StrokeThic = stroke_thic;
-			StrokeColor = SolidColorBrush.Parse(stroke);
-			StartPoint = Avalonia.Point.Parse(start);
-			EndPoint = Avalonia.Point.Parse(end);
+			StartPoint = Avalonia.Point.Parse(sstart);
+			EndPoint = Avalonia.Point.Parse(eend);
+			Pos = StartPoint;
+			DX = EndPoint.X - StartPoint.X;
+			DY = EndPoint.Y - StartPoint.Y;
 		}
-
 		public double AngleRT { get; set; }
 		public double RTX { get; set; }
 		public double RTY { get; set; }
@@ -27,7 +22,6 @@ namespace Graphic.Models
 		public double STY { get; set; }
 		public double AngleSTX { get; set; }
 		public double AngleSTY { get; set; }
-
 		public void Gr_Line_transform(string angle_rt, string rt, string st, string angle_st)
 		{
 			AngleRT = double.Parse(angle_rt);
@@ -65,6 +59,14 @@ namespace Graphic.Models
 					temp = string.Empty;
 				}
 			}
+		}
+		private Avalonia.Point pos;
+		public Avalonia.Point Pos { get => pos; set => SetAndRaise(ref pos, value); }
+		public void UpdateMove()
+		{
+			StartPoint = new Avalonia.Point(Pos.X, Pos.Y);
+			EndPoint = new Avalonia.Point(
+			Pos.X + DX, Pos.Y + DY);
 		}
 	}
 }

@@ -4,25 +4,21 @@ namespace Graphic.Models
 {
 	public class Gr_Ellipse : IFigure
 	{
-		public string Name { get; set; }
-		public double StrokeThic { get; set; }
-		public SolidColorBrush StrokeColor { get; set; }
-		public int Width { get; set; }
-		public int Height { get; set; }
-		public SolidColorBrush Fill { get; set; }
-		public Avalonia.Point StartPoint { get; set; }
+		private int width, height;
+		private SolidColorBrush fill;
+		private Avalonia.Point start;
+		public int Width { get => width; set => SetAndRaise(ref width, value); }
+		public int Height { get => height; set => SetAndRaise(ref height, value); }
+		public SolidColorBrush Fill { get => fill; set => SetAndRaise(ref fill, value); }
+		public Avalonia.Point StartPoint { get => start; set => SetAndRaise(ref start, value); }
 
-		public Gr_Ellipse(string name, int wid, int hei, string temp_point, string stroke_color, double stroke_thic, string fill)
+		public Gr_Ellipse(string nname, int wid, int hei, string temp_point, string stroke_color, double stroke_thic, string fill) : base(nname, stroke_thic, stroke_color)
 		{
-			Name = name;
-			StrokeThic = stroke_thic;
-			StrokeColor = SolidColorBrush.Parse(stroke_color);
 			Fill = SolidColorBrush.Parse(fill);
 			Width = wid;
 			Height = hei;
 			StartPoint = Avalonia.Point.Parse(temp_point);
 		}
-
 		public double AngleRT { get; set; }
 		public double RTX { get; set; }
 		public double RTY { get; set; }

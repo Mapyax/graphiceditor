@@ -20,7 +20,6 @@ namespace Graphic.Models
 					}); ;
 			}
 		}
-
 		public IEnumerable<IFigure> JsonLoad(string path)
 		{
 			using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate))

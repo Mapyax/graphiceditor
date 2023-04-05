@@ -1,19 +1,21 @@
 ﻿using Avalonia.Media;
+using DynamicData.Binding;
 
 namespace Graphic.Models
 {
-	public interface IFigure
+	public abstract class IFigure : AbstractNotifyPropertyChanged
 	{
-		string Name { get; set; }
-		double StrokeThic { get; set; }
-		SolidColorBrush StrokeColor { get; set; }
-
-		double AngleRT { get; set; }
-		double RTX { get; set; }
-		double RTY { get; set; }
-		double STX { get; set; }
-		double STY { get; set; }
-		double AngleSTX { get; set; }
-		double AngleSTY { get; set; }
+		private string name;
+		private double strokeThic;
+		public SolidColorBrush strokeColor;
+		public string Name { get => name; set => SetAndRaise(ref name, value); }
+		public double StrokeThic { get => strokeThic; set => SetAndRaise(ref strokeThic, value); }
+		public SolidColorBrush StrokeColor { get => strokeColor; set => SetAndRaise(ref strokeColor, value); }
+		public IFigure(string nname, double thic, string color)
+		{
+			Name = nname;
+			StrokeThic = thic;
+			StrokeColor = SolidColorBrush.Parse(color);
+		}
 	}
 }

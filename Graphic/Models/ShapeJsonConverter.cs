@@ -10,9 +10,8 @@ namespace Graphic.Models
 		{
 			if (reader.TokenType != JsonTokenType.StartObject)
 			{
-				throw new JsonException("Missed token");
+				throw new JsonException("Missed StartObject token");
 			}
-
 			reader.Read();
 			string? propertyName = reader.GetString();
 			if (propertyName != null && propertyName.Equals("type"))
@@ -70,10 +69,14 @@ namespace Graphic.Models
 					string? hh = reader.GetString();
 					reader.Read();
 					string? ASTY = reader.GetString();
-
+					reader.Read();
+					string? jj = reader.GetString();
+					reader.Read();
+					string? Pos = reader.GetString();
 
 					Gr_Line line = new Gr_Line(nameValue, int.Parse(strokeThicknessValue), strokeColorValue, startPointValue, endPointValue);
 					line.Gr_Line_transform(ART, RTX + " " + RTY, STX + " " + STY, ASTX + " " + ASTY);
+					line.Pos = Avalonia.Point.Parse(Pos);
 					reader.Read();
 					return line;
 				}
@@ -123,9 +126,14 @@ namespace Graphic.Models
 					string? hh = reader.GetString();
 					reader.Read();
 					string? ASTY = reader.GetString();
+					reader.Read();
+					string? jj = reader.GetString();
+					reader.Read();
+					string? Pos = reader.GetString();
 
 					Gr_PolyLine poly = new Gr_PolyLine(name, points, stroke_color, double.Parse(thic));
 					poly.Gr_Polyline_transform(ART, RTX + " " + RTY, STX + " " + STY, ASTX + " " + ASTY);
+					poly.Pos = Avalonia.Point.Parse(Pos);
 					reader.Read();
 					return poly;
 				}
@@ -243,9 +251,14 @@ namespace Graphic.Models
 					string? hh = reader.GetString();
 					reader.Read();
 					string? ASTY = reader.GetString();
+					reader.Read();
+					string? jj = reader.GetString();
+					reader.Read();
+					string? Pos = reader.GetString();
 
 					Gr_Polygon polygon = new Gr_Polygon(name, points, stroke_color, double.Parse(thic), fill);
 					polygon.Gr_Polygon_transform(ART, RTX + " " + RTY, STX + " " + STY, ASTX + " " + ASTY);
+					polygon.Pos = Avalonia.Point.Parse(Pos);
 					reader.Read();
 					return polygon;
 				}
@@ -363,9 +376,14 @@ namespace Graphic.Models
 					string? hh = reader.GetString();
 					reader.Read();
 					string? ASTY = reader.GetString();
+					reader.Read();
+					string? jj = reader.GetString();
+					reader.Read();
+					string? Pos = reader.GetString();
 
 					Gr_Path path = new Gr_Path(name, points, stroke_color, double.Parse(thic), fill);
 					path.Gr_Path_transform(ART, RTX + " " + RTY, STX + " " + STY, ASTX + " " + ASTY);
+					path.Pos = Avalonia.Point.Parse(Pos);
 					reader.Read();
 					return path;
 				}
@@ -377,7 +395,6 @@ namespace Graphic.Models
 
 			return null;
 		}
-
 		public override void Write(Utf8JsonWriter writer, IFigure value, JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
@@ -397,6 +414,7 @@ namespace Graphic.Models
 				writer.WriteString("STY", line.STY.ToString());
 				writer.WriteString("ASTX", line.AngleSTX.ToString());
 				writer.WriteString("ASTY", line.AngleSTY.ToString());
+				writer.WriteString("pos", line.Pos.ToString());
 			}
 			if (value is Gr_PolyLine poly)
 			{
@@ -412,6 +430,7 @@ namespace Graphic.Models
 				writer.WriteString("STY", poly.STY.ToString());
 				writer.WriteString("ASTX", poly.AngleSTX.ToString());
 				writer.WriteString("ASTY", poly.AngleSTY.ToString());
+				writer.WriteString("pos", poly.Pos.ToString());
 			}
 			if (value is Gr_Rectangle rec)
 			{
@@ -446,6 +465,7 @@ namespace Graphic.Models
 				writer.WriteString("STY", pol.STY.ToString());
 				writer.WriteString("ASTX", pol.AngleSTX.ToString());
 				writer.WriteString("ASTY", pol.AngleSTY.ToString());
+				writer.WriteString("pos", pol.Pos.ToString());
 			}
 			if (value is Gr_Ellipse el)
 			{
@@ -480,6 +500,7 @@ namespace Graphic.Models
 				writer.WriteString("STY", pa.STY.ToString());
 				writer.WriteString("ASTX", pa.AngleSTX.ToString());
 				writer.WriteString("ASTY", pa.AngleSTY.ToString());
+				writer.WriteString("pos", pa.Pos.ToString());
 			}
 
 			writer.WriteEndObject();
